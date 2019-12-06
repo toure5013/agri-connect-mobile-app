@@ -18,7 +18,7 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'Demander un titre foncifer',
+      title: 'Demander un titre foncier',
       url: '/permis/demander-permis',
       icon: 'add'
     }
