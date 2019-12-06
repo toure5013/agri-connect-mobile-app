@@ -20,12 +20,14 @@
       </ion-card-header>
       <ion-card-content>
         <ion-list>
-          <ion-item>
+          <ion-item *ngIf="permis.length<=0">
+              <p >
+                  Aucun titre foncier n'est encore disponible
+             </p>
+          </ion-item>
+          <ion-item *ngIf="permis.length!=0">
             <ion-label>1</ion-label>
-            <p *ngIf="message.length>0">
-                 Aucun titre foncier n'est encore disponible
-            </p>
-            <ion-button (onclick)="onVoirEtat()" slot="end" color="warning" [routerLink]="[ '/', 'permis', 'etat-permis'  ]">
+            <ion-button  (onclick)="onVoirEtat()" slot="end" color="warning" [routerLink]="[ '/', 'permis', 'etat-permis'  ]">
               Voir l'avancé
             </ion-button>
           </ion-item>

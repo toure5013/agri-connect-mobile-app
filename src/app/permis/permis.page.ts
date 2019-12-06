@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class PermisPage implements OnInit {
   message: string = '';
-  permis: any;
+  permis: any = '' || [ ];
   user: any;
   constructor(
     private _permisService: PermisService,
@@ -33,7 +33,13 @@ export class PermisPage implements OnInit {
   }
 
   async getPermis() {
-    await this._permisService.getPermisById(this.user.id).subscribe(
+    let id;
+    if(this.user){
+      id = this.user.id; 
+    }else{
+      id = 10000000
+    }
+    await this._permisService.getPermisById(id).subscribe(
       (data: any)=>{
         console.log(data);
         if(data.status != 200 ){

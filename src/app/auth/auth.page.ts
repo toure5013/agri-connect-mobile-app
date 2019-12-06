@@ -59,7 +59,7 @@ export class AuthPage implements OnInit {
     }
 
     //Supprimer plus tard
-    if (telephone == 44334233 || password == 12345678) {
+    if (telephone == 44334233 && password == 12345678) {
       this.message = '';
       let userData = {
         id : 1,
@@ -70,12 +70,11 @@ export class AuthPage implements OnInit {
       this._authService.loggedIn(true, userData);
       this._router.navigateByUrl('/permis');
     }
-
-
     else {
       this._authService.login(data).subscribe(
       (data: any) => {
-        if (data.login)  {
+        console.log(data);
+        if (data.status)  {
             console.log("connecté avec succès")
             this.message = '';
             this._authService.loggedIn(true, data.user);
