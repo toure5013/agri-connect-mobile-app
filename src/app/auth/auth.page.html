@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Connectez-vous</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid style="height: 100%; background-image: url('../../assets/back.jpg')">
+    <ion-row class="ion-align-items-center" style="height: 100%">
+      <ion-col size-sm="6" offset-sm="3">
+        <ion-card style="background-color: whitesmoke">
+          <ion-card-header>
+            <ion-card-title class="ion-text-center">Connexion</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list>
+              <ion-item lines="none">
+                <ion-item class="centre-item" lines="none">
+                  <ion-img class="ion-justify-content-center logo" src="../../assets/logo_ronde.jpg"></ion-img>
+                </ion-item>
+              </ion-item>
+              <!-- form begin -->
+              <ion-item *ngIf="message.length>0">
+                <ion-item class="centre-item" lines="none">
+                  <ion-badge color="danger" mode="md">
+                      {{ message }}
+                  </ion-badge>
+                </ion-item>
+              </ion-item>
+              <form #authForm='ngForm' (ngSubmit)="onSubmit(authForm)">
+                <ion-item>
+                  <ion-label position="floating">Numéro de téléphone<ion-text color="danger">*</ion-text>
+                  </ion-label>
+                  <ion-input type="tel" name="telephone" ngModel required #telephoneCtrl="ngModel"></ion-input>
+                </ion-item>
+                <ion-item *ngIf="!telephoneCtrl.valid && telephoneCtrl.touched" lines="none">
+                  <p>
+                    Numéro invalide
+                  </p>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">Mot de passe <ion-text color="danger">*</ion-text>
+                  </ion-label>
+                  <ion-input type="password" name="password" ngModel required #passwordCtrl="ngModel"></ion-input>
+                </ion-item>
+                <ion-item *ngIf="!passwordCtrl.valid && passwordCtrl.touched" lines="none">
+                  <p>
+                    Mot de passe invalide
+                  </p>
+                </ion-item>
+                <ion-button [disabled]="!authForm.valid" class="ion-margin" expand="block" color="success" type="submit">
+                  Connexion
+                </ion-button>
+              </form>
+              
+              <ion-button  
+              color="medium" 
+              class="ion-margin" 
+              fill="outline" 
+              expand="full" 
+              [routerLink]="[ '/', 'auth', 'register']">
+                Créer un nouveau compte
+              </ion-button>
+
+              <!-- form end -->
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,5 +1,7 @@
 {
   "name": "agri-connect",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

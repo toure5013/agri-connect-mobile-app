@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Titre foncicer</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="[ '/', 'auth', 'deconnexion' ]">
+        <ion-icon slot="start" name="exit"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card>
+      <ion-card-header>
+        <!-- <ion-card-subtitle>Vos Certificat</ion-card-subtitle> -->
+        <ion-card-title class="ion-text-center">Vos certificat</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <ion-label>1</ion-label>
+            <p *ngIf="message.length>0">
+                 Aucun titre foncier n'est encore disponible
+            </p>
+            <ion-button (onclick)="onVoirEtat()" slot="end" color="warning" [routerLink]="[ '/', 'permis', 'etat-permis'  ]">
+              Voir l'avancé
+            </ion-button>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+
+      <div class="ion-text-center ion-margin">
+          <ion-button (onclick)="onNouveauPermis" color="tertiary" [routerLink]="[ '/permis', 'demander-permis' ]">
+            Demander un certificat
+          </ion-button>
+      </div>
+    </ion-card>
+</ion-content>

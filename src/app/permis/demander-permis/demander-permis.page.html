@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/permis"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Demande de titre foncier</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="[ '/', 'auth', 'deconnexion' ]">
+        <ion-icon slot="start" name="exit"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid style="height: 100%; background-image: url('../../../assets/back3.jpg')">
+    <ion-row class="ion-align-items-center" style="height: 100%">
+      <ion-col size-sm="6" offset-sm="3">
+        <ion-card style="background-color: whitesmoke">
+          <ion-card-header>
+            <ion-card-title class="ion-text-center">Confirmation de demande de titre foncier</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <form #DemanderPermisForm='ngForm' (ngSubmit)="onSubmit(DemanderPermisForm)">
+              
+              <ion-item>
+                <ion-label position="floating">Document 1<ion-text color="danger">*</ion-text>
+                </ion-label>
+                <ion-input type="file" name="documentUnCtrl" ngModel required #documentUnCtrl="ngModel"></ion-input>
+              </ion-item>
+
+              <ion-item *ngIf="!documentUnCtrl.valid && documentUnCtrl.touched" lines="none">
+                <p>
+                  Document 1 Invalide
+                </p>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="floating">Document 2<ion-text color="danger">*</ion-text>
+                </ion-label>
+                <ion-input type="file" name="documentDeux" ngModel required #documentDeuxCtrl="ngModel"></ion-input>
+              </ion-item>
+
+              <ion-item *ngIf="!documentDeuxCtrl.valid && documentDeuxCtrl.touched" lines="none">
+                <p>
+                  Document 2 invalide
+                </p>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label position="floating">Document 2<ion-text color="danger">*</ion-text>
+                  </ion-label>
+                  <ion-input type="file" name="documentTroisCtrl" ngModel required #documentTroisCtrl="ngModel"></ion-input>
+              </ion-item>
+
+              <ion-item *ngIf="!documentTroisCtrl.valid && documentTroisCtrl.touched" lines="none">
+                  <p>
+                    Document 3 invalide
+                  </p>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="floating">Localité<ion-text color="danger">*</ion-text>
+                </ion-label>
+                <ion-input type="text" name="localite" ngModel required #localiteCtrl="ngModel"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="!localiteCtrl.valid && localiteCtrl.touched" lines="none">
+                <p>
+                  Localité invalide
+                </p>
+              </ion-item>
+              <ion-button [disabled]="!DemanderPermisForm.valid" class="ion-margin" expand="block" color="success"
+                type="submit">
+                Confirmer la demande
+              </ion-button>
+            </form>
+            <!-- form end -->
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

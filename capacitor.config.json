@@ -1,0 +1,8 @@
+{
+  "appId": "com.agri.connect",
+  "appName": "agri-connect",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "cordova": {}
+}

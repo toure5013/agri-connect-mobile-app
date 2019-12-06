@@ -1,0 +1,81 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/auth"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Inscrivez-vous</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-grid style="height: 100%">
+        <ion-row class="ion-justify-content-center ion-align-items-center">
+            <ion-col size-sm="6" offset-sm="3">
+                <ion-card class="ion-align-items-center">
+                    <ion-card-header>
+                        <ion-card-title class="ion-text-center">Inscription</ion-card-title>
+                    </ion-card-header>
+
+                    <ion-card-content>
+                        <ion-list>
+                            <ion-item lines="none">
+                                <ion-item class="centre-item">
+                                    <ion-img class="ion-justify-content-center logo" [src]="logo"></ion-img>
+                                </ion-item>
+                            </ion-item>
+                            <!-- form begin -->
+                            <form #registerForm='ngForm' (ngSubmit)="onSubmit(registerForm)">
+                                <ion-item>
+                                    <ion-label position="floating">
+                                        Nom <ion-text color="danger">*</ion-text>
+                                    </ion-label>
+                                    <ion-input type="name" name="nom" ngModel required></ion-input>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label position="floating">
+                                        Prénom <ion-text color="danger">*</ion-text>
+                                    </ion-label>
+                                    <ion-input type="text" name="prenom" ngModel required></ion-input>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label position="floating">
+                                        Numéro de téléphone<ion-text color="danger">*</ion-text>
+                                    </ion-label>
+                                    <ion-input type="tel" name="telephone" ngModel required></ion-input>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label position="floating">Mot de passe <ion-text color="danger">*</ion-text>
+                                    </ion-label>
+                                    <ion-input type="password" name="password" ngModel required required></ion-input>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label position="floating">
+                                        Confirmer mot de passe <ion-text color="danger">*</ion-text>
+                                    </ion-label>
+                                    <ion-input type="password" name="passwordConfirm" ngModel required></ion-input>
+                                </ion-item>
+                                <div class="ion-padding">
+                                    <ion-button type="submit" expand="block" color="warning">
+                                        <ion-icon slot="start" name="add"></ion-icon>
+                                        Inscription
+                                    </ion-button>
+                                    <ion-button 
+                                    class="ion-margin" 
+                                    fill="outline" 
+                                    expand="full" 
+                                    color="medium"
+                                    [routerLink]="[ '/', 'auth']"
+                                    >
+                                        J'ai dejà un compte!
+                                    </ion-button>
+                                </div>
+                            </form>
+                            <!-- form ended -->
+                        </ion-list>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

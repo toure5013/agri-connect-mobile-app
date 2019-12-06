@@ -7,6 +7,22 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  images: string[] = [
+    "../../assets/back.jpg",
+    // "../../assets/back3.jpg",
+    "../../assets/back.jpg",
+  ];
+
+  permis = [
+    {
+      title: "Vente",
+      description: "ceci est un permis en vente",
+      location: "Gagnoa",
+      imageUrl: "../../assets/logo.jpg",
+      price: 1230000
+    }
+  ]
+  constructor() { }
+
 
 }
