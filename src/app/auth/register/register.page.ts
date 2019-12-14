@@ -22,19 +22,15 @@ export class RegisterPage implements OnInit {
 
 
   onSubmit(_ngForm: NgForm) {
-    let nom = _ngForm.value.nom;
-    let prenom = _ngForm.value.prenom;
+    let fistrname = _ngForm.value.fistrname;
+    let lastname = _ngForm.value.lastname;
     let telephone = _ngForm.value.telephone;
     let password = _ngForm.value.password;
     let passwordConfirm = _ngForm.value.passwordConfirm;
-    console.log(nom);
-    console.log(prenom); console.log(telephone);
-    console.log(password);
-    console.log(passwordConfirm);
 
     var data = {
-      nom,
-      prenom,
+      fistrname,
+      lastname,
       telephone,
       password,
       passwordConfirm

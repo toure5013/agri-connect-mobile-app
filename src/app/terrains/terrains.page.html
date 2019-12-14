@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar color="warning">
+
+    <ion-buttons slot="start">
+      <ion-menu-button ></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>
+      <form [formGroup]="searchFormGroup">
+        <ion-input type="text" formControlName="search"  
+        placeholder="Rechercher un terrain"
+        >
+      </ion-input>
+      </form>
+  </ion-title>
+
+
+    <ion-buttons slot="primary">
+
+      <ion-button 
+      (click)="onSearch()"
+      [disabled]="!searchFormGroup.valid"
+      >
+        <ion-icon slot="start" name="search"
+        ></ion-icon>
+      </ion-button>
+
+    </ion-buttons>
+
+
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-sm="6" offset-sm="3">
+        <ion-segment (ionChange)="onSegmentChanged($event)">
+          <ion-segment-button value="acheter" color="secondary">
+            <ion-label color="secondary">Acheter Terrain</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="louer" color="success">
+            <ion-label color="secondary">Louer Terrain</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size-sm="4" *ngFor="let terrain of terrains; let index = index;">
+        <ion-item>
+          <ion-label>
+            <ion-img src="../../assets/background.jpg"></ion-img>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-button color="light" (click)="onInfo(index)">
+            Info
+          </ion-button>
+          <ion-button color="success"[routerLink]="[ '/terrains', 'acheter', terrain.id ]"> 
+            Acheter
+          </ion-button>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

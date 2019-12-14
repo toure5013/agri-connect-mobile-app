@@ -12,6 +12,12 @@ export class PermisPage implements OnInit {
   message: string = '';
   permis: any = '' || [ ];
   user: any;
+  deconnexionButton =  {
+    title: 'Deconnexion',
+    url: 'auth/deconnexion',
+    icon: 'exit'
+  };
+
   constructor(
     private _permisService: PermisService,
     private _authService: AuthService,
@@ -29,7 +35,7 @@ export class PermisPage implements OnInit {
   }
 
   async getUserdata() {
-     this.user =  await this._authService.user;
+     this.user =  await this._authService.getUserData;
   }
 
   async getPermis() {
@@ -59,8 +65,15 @@ export class PermisPage implements OnInit {
     this._permisService.ajouterUnNouveauEtat(7);
   }
   
-  onNouveauPermis() {
-    this._permisService.ajouterUnNouveauEtat(2);
+  onNewPermis() {
+    console.log("....................");
+    this._permisService.ajouterUnNouveauEtat = 2;
+    
+  }
+
+
+  onPayement() {
+    this._router.navigate(['/payement']);
   }
 
   

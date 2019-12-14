@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -11,6 +11,8 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+  @Input() newMenuElement;
+
   public appPages = [
     {
       title: 'Accueil',
@@ -18,9 +20,44 @@ export class AppComponent {
       icon: 'home'
     },
     {
+      title: 'Liste de mes demandes de certificats',
+      url: '/permis',
+      icon: 'albums'
+    },
+    {
       title: 'Demander un titre foncier',
       url: '/permis/demander-permis',
       icon: 'add'
+    },
+    {
+      title: 'Acheter un terrain',
+      url: '/terrains',
+      icon: "card"
+    },
+    {
+      title: 'Lister mes terrains',
+      url: '/terrain/liste-user-terrain',
+      icon: "grid"
+    },
+    {
+      title: 'Vendre un terrain',
+      url: '/terrains/ajouter', //choisir si c'est pour vendre ou pour faire louer
+      icon: "card"
+    },
+    {
+      title: 'Louer un terrain',
+      url: "/terrains/louer",  //liste des terrains à louer
+      icon: "card"
+    },
+    {
+      title: 'Mettre terrain en location',
+      url: "/terrains/ajouter", //Ajouter un terrain à louer
+      icon: "card"
+    },
+    {
+      title: 'Deconnexion',
+      url: 'auth/deconnexion',
+      icon: 'exit'
     }
   ];
 
@@ -37,38 +74,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      if(this._authService.logState){
-        this.appPages.push(
-          {
-            title: 'Deconnexion',
-            url: 'auth/deconnexion',
-            icon: 'exit'
-          }
-        );
-      }
     });
   }
 
-  ionViewWillEnter() {
-    if(this._authService.logState){
-      this.appPages.push(
-        {
-          title: 'Deconnexion',
-          url: 'auth/deconnexion',
-          icon: 'exit'
-        }
-      );
-    }
-  }
-  ionViewDidEnter() {
-    if(this._authService.logState){
-      this.appPages.push(
-        {
-          title: 'Deconnexion',
-          url: 'auth/deconnexion',
-          icon: 'exit'
-        }
-      );
-    }
-  }
 }

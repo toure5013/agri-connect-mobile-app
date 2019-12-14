@@ -6,7 +6,8 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class PermisService {
-  baseUrl = 'https://backend-agri-connect.herokuapp.com';
+
+  baseUrl = 'https://backend-agri-connect.herokuapp.com/api/v1';
 
   private _etatAvancementPermis = 2;
 
@@ -16,7 +17,7 @@ export class PermisService {
 
 
 
-  get etatAvancementPermis() {
+  get getEtatAvancementPermis() {
     return this._etatAvancementPermis;
   }
    
@@ -29,17 +30,17 @@ export class PermisService {
   //Don't forget to set the color of the buton and if it lust be checked or not 
 
   getPermisById(id) {
-    return this._httpClient.get(this.baseUrl + '/api/v1/permis/'+id);
+    return this._httpClient.get(this.baseUrl + '/permis/'+id);
   }
 
 
 
   addPermis(data) {
-    return this._httpClient.get(this.baseUrl + '/api/v1/permis/demande', data);
+    return this._httpClient.get(this.baseUrl + '/permis/demande', data);
   }
 
   getAllPermis(data) {
-    return this._httpClient.get(this.baseUrl + '/api/v1/permis', data);
+    return this._httpClient.get(this.baseUrl + '/permis', data);
   }
 
   

@@ -1,7 +1,8 @@
 {
   "name": "agri-connect",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

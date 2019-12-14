@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="warning">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Titre foncicer</ion-title>
     <ion-buttons slot="end">
@@ -24,19 +24,27 @@
                   Aucun titre foncier n'est encore disponible
              </p>
           </ion-item>
-          <ion-item *ngIf="permis.length!=0">
-            <ion-label>1</ion-label>
-            <ion-button  (onclick)="onVoirEtat()" slot="end" color="warning" [routerLink]="[ '/', 'permis', 'etat-permis'  ]">
-              Voir l'avancé
-            </ion-button>
-          </ion-item>
+          <div  *ngIf="permis.length>0">
+              <ion-item *ngFor="let permi of permis; let index=index;">
+                  <ion-label>{{ index }}</ion-label>
+                  <ion-button  (click)="onVoirEtat()" slot="end" color="warning" [routerLink]="[ '/', 'permis', 'etat-permis'  ]">
+                    Voir l'avancé
+                  </ion-button>
+                  <ion-button  (click)="onPayement()" slot="end" color="warning" [routerLink]="[ '/payement' ]">
+                    Payement
+                  </ion-button>
+                </ion-item>
+          </div>
+          
         </ion-list>
       </ion-card-content>
 
       <div class="ion-text-center ion-margin">
-          <ion-button (onclick)="onNouveauPermis" color="tertiary" [routerLink]="[ '/permis', 'demander-permis' ]">
+        
+          <ion-button (click)="onNewPermis()" color="tertiary" [routerLink]="[ '/permis', 'demander-permis' ]" >
             Demander un certificat
           </ion-button>
+
       </div>
     </ion-card>
 </ion-content>

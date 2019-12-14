@@ -1,8 +1,10 @@
 <ion-header>
   <ion-toolbar color="warning">
+
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/permis"></ion-back-button>
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
+
     <ion-title>Demande de titre foncier</ion-title>
     <ion-buttons slot="end">
       <ion-button [routerLink]="[ '/', 'auth', 'deconnexion' ]">
@@ -15,50 +17,66 @@
 <ion-content>
   <ion-grid style="height: 100%; background-image: url('../../../assets/back3.jpg')">
     <ion-row class="ion-align-items-center" style="height: 100%">
+
       <ion-col size-sm="6" offset-sm="3">
+
         <ion-card style="background-color: whitesmoke">
+
           <ion-card-header>
             <ion-card-title class="ion-text-center">Confirmation de demande de titre foncier</ion-card-title>
           </ion-card-header>
+
           <ion-card-content>
             <form #DemanderPermisForm='ngForm' (ngSubmit)="onSubmit(DemanderPermisForm)">
-              
-              <ion-item>
-                <ion-label position="floating">Document 1<ion-text color="danger">*</ion-text>
-                </ion-label>
-                <ion-input type="file" name="documentUnCtrl" ngModel required #documentUnCtrl="ngModel"></ion-input>
-              </ion-item>
+              <div class="docuementScannerTrue ion-text-center" *ngIf="etatScanne">
+                <ion-item>
+                  <ion-label position="floating">Certificat viallageois<ion-text color="danger">*</ion-text>
+                  </ion-label>
+                  <ion-input type="file" name="documentUnCtrl" ngModel required #documentUnCtrl="ngModel"></ion-input>
+                </ion-item>
 
-              <ion-item *ngIf="!documentUnCtrl.valid && documentUnCtrl.touched" lines="none">
-                <p>
-                  Document 1 Invalide
-                </p>
-              </ion-item>
+                <ion-item *ngIf="!documentUnCtrl.valid && documentUnCtrl.touched" lines="none">
+                  <p>
+                    Certificat viallageois Invalide
+                  </p>
+                </ion-item>
 
-              <ion-item>
-                <ion-label position="floating">Document 2<ion-text color="danger">*</ion-text>
-                </ion-label>
-                <ion-input type="file" name="documentDeux" ngModel required #documentDeuxCtrl="ngModel"></ion-input>
-              </ion-item>
-
-              <ion-item *ngIf="!documentDeuxCtrl.valid && documentDeuxCtrl.touched" lines="none">
-                <p>
-                  Document 2 invalide
-                </p>
-              </ion-item>
-
-              <ion-item>
+                <ion-item>
                   <ion-label position="floating">Document 2<ion-text color="danger">*</ion-text>
                   </ion-label>
-                  <ion-input type="file" name="documentTroisCtrl" ngModel required #documentTroisCtrl="ngModel"></ion-input>
-              </ion-item>
+                  <ion-input type="file" name="documentDeux" ngModel required #documentDeuxCtrl="ngModel"></ion-input>
+                </ion-item>
 
-              <ion-item *ngIf="!documentTroisCtrl.valid && documentTroisCtrl.touched" lines="none">
+                <ion-item *ngIf="!documentDeuxCtrl.valid && documentDeuxCtrl.touched" lines="none">
                   <p>
-                    Document 3 invalide
+                    Document 2 invalide
                   </p>
-              </ion-item>
+                </ion-item>
+              </div>
 
+              <div class="docuementScannerFalse ion-text-center" *ngIf="!etatScanne">
+                  <ion-item>
+                    <ion-label> Certificat viallageois</ion-label>
+                      <ion-button (click)="takeThirstPicture()">
+                        <ion-icon slot="icon-only" name="camera" > </ion-icon>
+                      </ion-button>
+                  </ion-item>
+  
+                  <ion-item *ngIf="image1Url">
+                      <img [src]="image1Url" style="max-width: 100%">
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-label>Document 2</ion-label>
+                      <ion-button (click)="takeSecondPicture()">
+                        <ion-icon slot="icon-only" name="camera" > </ion-icon> 
+                      </ion-button>
+                  </ion-item>
+                  <ion-item *ngIf="image2Url">
+                    <img [src]="image2Url" style="max-width: 100%">
+                </ion-item>
+
+                </div>
               <ion-item>
                 <ion-label position="floating">Localité<ion-text color="danger">*</ion-text>
                 </ion-label>
@@ -73,6 +91,7 @@
                 type="submit">
                 Confirmer la demande
               </ion-button>
+
             </form>
             <!-- form end -->
           </ion-card-content>

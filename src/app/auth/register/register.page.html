@@ -30,13 +30,13 @@
                                     <ion-label position="floating">
                                         Nom <ion-text color="danger">*</ion-text>
                                     </ion-label>
-                                    <ion-input type="name" name="nom" ngModel required></ion-input>
+                                    <ion-input type="name" name="firstname" ngModel required></ion-input>
                                 </ion-item>
                                 <ion-item>
                                     <ion-label position="floating">
                                         Prénom <ion-text color="danger">*</ion-text>
                                     </ion-label>
-                                    <ion-input type="text" name="prenom" ngModel required></ion-input>
+                                    <ion-input type="text" name="lastname" ngModel required></ion-input>
                                 </ion-item>
                                 <ion-item>
                                     <ion-label position="floating">
@@ -57,7 +57,7 @@
                                 </ion-item>
                                 <div class="ion-padding">
                                     <ion-button type="submit" expand="block" color="warning">
-                                        <ion-icon slot="start" name="add"></ion-icon>
+                                        <ion-icon [disabled]="!registerForm.valid" slot="start" name="add"></ion-icon>
                                         Inscription
                                     </ion-button>
                                     <ion-button 

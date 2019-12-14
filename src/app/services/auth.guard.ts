@@ -16,9 +16,9 @@ export class AuthGuard implements CanLoad {
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
-      if(!this._authService.logState){
+      if(!this._authService.getLogState){
         this._router.navigateByUrl('/auth');
       }
-      return this._authService.logState;
+      return this._authService.getLogState;
   }
 }

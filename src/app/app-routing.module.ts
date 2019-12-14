@@ -11,7 +11,6 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then( m => m.AuthPageModule),
-    
   },
   {
     path: 'home',
@@ -22,17 +21,26 @@ const routes: Routes = [
     loadChildren: () => import('./list/list.module').then(m => m.ListPageModule),
     canLoad: [AuthGuard]
   },
-  
   {
     path: 'permis',
     loadChildren: () => import('./permis/permis.module').then( m => m.PermisPageModule),
     canLoad: [AuthGuard]
   },
   {
+    path: 'payement',
+    loadChildren: () => import('./payement/payement.module').then( m => m.PayementPageModule),
+    canLoad: [AuthGuard]
+  },
+  {
+    path: 'terrains',
+    loadChildren: () => import('./terrains/terrains.module').then( m => m.TerrainsPageModule),
+    canLoad: [AuthGuard]
+  },
+  {
     path: '**',
     redirectTo: 'home',
     pathMatch: 'full'
-  },
+  }
 ];
 
 @NgModule({

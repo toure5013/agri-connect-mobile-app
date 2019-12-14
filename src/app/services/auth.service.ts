@@ -8,39 +8,71 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AuthService {
 
-  baseUrl = 'https://backend-agri-connect.herokuapp.com';
+  /*----------------------------------------------------------------------------- 
+                              PROPRIETIES
+ /*----------------------------------------------------------------------------- */
+  baseUrl = 'https://backend-agri-connect.herokuapp.com/api/v1';
 
-  private _userAuthenticated: boolean = false;
+  private _userAuthenticated: boolean = true;
   private _userData: any[] = [];
+
+
   constructor(
     private _httpClient: HttpClient
   ) { }
 
-  get logState() {
+
+
+/*----------------------------------------------------------------------------- 
+                                 GETTER AND SETTER
+ /*----------------------------------------------------------------------------- */
+  get getLogState(): boolean {
+    /**
+     * This is a getter it used for getting propriety state, 
+     * that permit to know if user is loggin or not
+     */
     return this._userAuthenticated;
-  }
-  get user() {
-    return this._userData;
   }
 
   
 
-  loggedIn(state:boolean, data) {
-     this._userAuthenticated =  state;
+   setLogState(authState: boolean){
+    this._userAuthenticated = authState;
+  }
+
+  get getUserData() {
+    /**
+     *  This use to get user stocked data from application cache
+     */
+     return this._userData;
+  }
+
+   setUserData(data: any) {
+    /**
+     *  This use to stock user data in application cache
+     */
      this._userData = data;
   }
 
   
+
+
+ /*----------------------------------------------------------------------------- 
+                                      METHOD
+ /*----------------------------------------------------------------------------- */
+  register(data) {
+    return this._httpClient.post(this.baseUrl + '/user',data);
+  }
+
+
   login(data) {
-    return this._httpClient.post(this.baseUrl + '/api/v1/connexion',data);
+    return this._httpClient.post(this.baseUrl + '/connexion',data);
   }
 
   logout() {
     this._userAuthenticated = false;
   }
 
-  register(data) {
-    return this._httpClient.post(this.baseUrl + '/api/v1/user',data);
-  }
+  
 
 }

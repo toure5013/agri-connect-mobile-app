@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-buttons *ngIf="isLoggin" slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Information terrain
+    </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="onCancel()">
+        <ion-icon color="danger" slot="start" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="welcome-card">
+    <ion-slides mode="ios" pager="ios" scrollbar="ios">
+      <ion-slide *ngFor="let image of images">
+        <ion-img [src]="image"></ion-img>
+      </ion-slide>
+    </ion-slides>
+    <ion-card-header>
+      <ion-card-title>Retrouver ici toute les informations sur votre futur terrain</ion-card-title>
+      <ion-card-subtitle>Faite nous confiance!</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <p>
+        Prix  : <ion-badge color="secondary" mode="ios">{{ selectedTerrain.cost }}</ion-badge>  
+          <br> 
+        Localisation : <ion-badge color="tertiary" mode="ios">{{ selectedTerrain.localisation }}</ion-badge> 
+          <br> 
+        Superficie : <ion-badge color="primary" mode="ios">{{ selectedTerrain.superficie }} m²</ion-badge> 
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+    <ion-button expand="block" color="success" (click)="onbuy()" >
+      Acheter
+    </ion-button>
+</ion-content>

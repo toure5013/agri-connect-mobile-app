@@ -17,8 +17,12 @@ export class EtatPermisPage implements OnInit {
       color: 'danger', description: 'Envoi de demande de titre foncier'
     },
     {
-      numero : 2,
+      numero : 1,
       color: 'danger', description: 'Reception des documents'
+    },
+    {
+      numero : 2,
+      color: 'danger', description: 'Payement des frais du certificats'
     },
     {
       numero : 3,
@@ -48,7 +52,7 @@ export class EtatPermisPage implements OnInit {
 
   ngOnInit() {
 
-     let etape = this._permisService.etatAvancementPermis;
+     let etape = this._permisService.getEtatAvancementPermis;
     //Creer un service pour connaitre létat d'avancement du papier
     for(let i =0;  i < etape ; i++ ) {
        this.etapes[i].color = "success";
@@ -61,7 +65,7 @@ export class EtatPermisPage implements OnInit {
 
 
   ionViewWillEnter() {
-    let etape = this._permisService.etatAvancementPermis;
+    let etape = this._permisService.getEtatAvancementPermis;
     //Creer un service pour connaitre létat d'avancement du papier
     for(let i =0;  i < etape ; i++ ) {
        this.etapes[i].color = "success";
@@ -71,4 +75,7 @@ export class EtatPermisPage implements OnInit {
     }
   }
 
+  onPayement() {
+    console.log("Payement...");
+  }
 }

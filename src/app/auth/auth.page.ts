@@ -16,86 +16,95 @@ export class AuthPage implements OnInit {
   constructor(
     private _authService: AuthService,
     private _router: Router
-  ) { 
-    if (this._authService.logState) {
+  ) {
+    if (this._authService.getLogState) {
       this._router.navigate(['permis']);
     }
   }
 
   ngOnInit() {
-    if (this._authService.logState) {
+    if (this._authService.getLogState) {
       this._router.navigate(['permis']);
     }
   }
 
- 
+
   ionViewWillEnter() {
-    if (this._authService.logState) {
+    if (this._authService.getLogState) {
       this._router.navigate(['permis']);
     }
   }
   ionViewDidEnter() {
-    if (this._authService.logState) {
+    if (this._authService.getLogState) {
       this._router.navigate(['permis']);
     }
   }
 
 
-//   {name: "success", status: 200, message: "connecter avec succès", 
-//login: true, user: {…}}
-// login: true
-// message: "connecter avec succès"
-// name: "success"
-// status: 200
+  //   {name: "success", status: 200, message: "connecter avec succès", 
+  //login: true, user: {…}}
+  // login: true
+  // message: "connecter avec succès"
+  // name: "success"
+  // status: 200
 
   onSubmit(_ngForm: NgForm) {
     let telephone = _ngForm.value.telephone;
     let password = _ngForm.value.password;
-    console.log(telephone);
-    console.log(password);
     var data = {
       telephone,
       password
     }
 
     //Supprimer plus tard
-    if (telephone == 44334233 && password == 12345678) {
-      this.message = '';
-      let userData = {
-        id : 1,
-        nom : "TOURE",
-        prenom : "SOULEYMANE",
-        telephone : 44334233,
-      }
-      this._authService.loggedIn(true, userData);
-      this._router.navigateByUrl('/permis');
-    }
-    else {
-      this._authService.login(data).subscribe(
-      (data: any) => {
-        console.log(data);
-        if (data.status)  {
-            console.log("connecté avec succès")
-            this.message = '';
-            this._authService.loggedIn(true, data.user);
-            this._router.navigateByUrl('/permis');
-          
+    if (telephone == 44334233) {
+      if (password == 12345678) {
+        this.message = 'connecté avec succès';
+        let userData = {
+          id: 1,
+          nom: "TOURE",
+          prenom: "SOULEYMANE",
+          telephone: 44334233,
         }
-        else {
-          this.message = data.message;
-          //show alert message
-        }
-      },
-      (error) => {
-        console.log(error)
-      })
+        console.log("connecté avec succès");
+        this._authService.setUserData(userData);
 
-    // if( telephone != 44334233 || password != 12345678){
-    //   console.log("Erreur d'identifiant");
-    //   return;
-    // }
+        this._authService.setLogState(true);
+
+        this._router.navigateByUrl('/permis');
+      } else {
+        this.message = "Mot de passe invalide"
+      }
+
+    }
+
+    else {
+
+      this._authService.login(data).subscribe(
+        (dataReturned: any) => {
+
+          console.log(data);
+
+          if (dataReturned.status) {
+            console.log("connecté avec succès")
+            this.message = 'connecté avec succès';
+
+            this._authService.setUserData(dataReturned.user);
+
+            this._router.navigateByUrl('/permis');
+
+          }
+          else {
+            this.message = dataReturned.message;
+            //show alert message
+          }
+        },
+        (error) => {
+          console.log(error)
+          this.message = JSON.stringify(error.message);
+        });
+    }
   }
-}
 
 
 }
