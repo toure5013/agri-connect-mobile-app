@@ -1,83 +1,49 @@
 <ion-header>
   <ion-toolbar color="warning">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/payement"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Payement</ion-title>
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Liste de vos payements</ion-title>
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
-  <!-- <ion-grid style="height: 100%; background-image: url('../../assets/back.jpg')"> -->
-  <ion-grid style="height: 100%;">
-    <ion-row class="ion-align-items-center" style="height: 100%">
-      <ion-col size-sm="6" offset-sm="3">
-        <ion-card style="background-color: whitesmoke">
-          <ion-card-header>
-            <ion-card-title class="ion-text-center">Informations de payement</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <ion-list>
-              <form #authForm='ngForm' (ngSubmit)="onSubmit(authForm)">
-                <ion-item>
-                  <ion-label position="floating">Numéro de payement<ion-text color="danger">*</ion-text>
-                  </ion-label>
-                  <ion-input type="tel" name="numero_payement" ngModel required #numeroPayementCtrl="ngModel">
-                  </ion-input>
-                </ion-item>
-                <ion-item *ngIf="!numeroPayementCtrl.valid && numeroPayementCtrl.touched" lines="none">
-                  <p>
-                    Numéro invalide !
-                  </p>
-                </ion-item>
-                <ion-item>
-                  <ion-label position="floating">Référence de payement <ion-text color="danger">*</ion-text>
-                  </ion-label>
-                  <ion-input type="text" name="reference_payment" ngModel required #referenceCtrl="ngModel"></ion-input>
-                </ion-item>
-                <ion-item *ngIf="!referenceCtrl.valid && referenceCtrl.touched" lines="none">
-                  <p>
-                    Référence invalide
-                  </p>
-                </ion-item>
-                <ion-item>
-                  <ion-label>Terrain pour lequel cette somme doit être utiliser</ion-label>
-                  <ion-select multiple="false" placeholder="Seletionner le certificat">
-                    <ion-select-option value="1">1</ion-select-option>
-                    <ion-select-option value="2">2</ion-select-option>
-                  </ion-select>
-                </ion-item>
-                <ion-item>
-                  <ion-label position="floating">Somme payer <ion-text color="danger">*</ion-text>
-                  </ion-label>
-                  <ion-input type="number" name="somme_payer" min="1" ngModel required #sommePayerCtrl="ngModel">
-                  </ion-input>
-                </ion-item>
-                <ion-item *ngIf="!sommePayerCtrl.valid && sommePayerCtrl.touched" lines="none">
-                  <p>
-                    Somme invalid
-                  </p>
-                </ion-item>
-                <ion-item>
-                  <ion-label position="floating">Date de payement</ion-label>
-                  <ion-datetime name="date" #dateCtrl="ngModel" ngModel required></ion-datetime>
-                </ion-item>
-                <ion-item *ngIf="!dateCtrl.valid && dateCtrl.touched" lines="none">
-                  <p>
-                    Date invalide
-                  </p>
-                </ion-item>
-                <ion-button [disabled]="!authForm.valid" class="ion-margin" expand="block" color="success"
-                  type="submit">
-                  Envoyer
-                </ion-button>
-              </form>
-              <!-- form end -->
-            </ion-list>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <ion-card>
+      <ion-card-header>
+          <ion-card-title class="ion-text-center">Vos payement effectués</ion-card-title>
+      </ion-card-header>
+      <ion-card-content >
+
+          <ion-item  *ngIf="payementEffectuers.length == 0">
+              <p style="text-align:center" >
+                  Aucun payement effectuer
+              </p>
+          </ion-item>
+
+
+          <ion-item *ngFor="let payementEffectuer of payementEffectuers" lines="none">
+                      <ion-label> {{ payementEffectuer.reference }}</ion-label>
+                      <ion-button 
+                         slot="end" 
+                         color="medium"
+                          [routerLink]="[ '/', 'payement', 'detail-payement', payementEffectuer.reference  ]">
+                          Information du payement
+                      </ion-button>
+
+              <ion-avatar slot="end">
+                  <ion-button color="danger" active>
+                    <ion-icon *ngIf="1" slot="start" name="close"></ion-icon>
+                    <ion-icon *ngIf="0" slot="start" name="checkmark"></ion-icon>
+                  </ion-button>
+              </ion-avatar>
+          <!-- Valider le payement avec ce bouton -->
+          </ion-item>
+      </ion-card-content>
+
+      <div class="ion-text-center ion-margin">
+          <ion-button color="tertiary" expand="block" [routerLink]="[ '/payement', 'new-payement']">
+              Effectuer un nouveau payement
+          </ion-button>
+      </div>
+  </ion-card>
 </ion-content>

@@ -16,6 +16,18 @@
 
 <ion-content>
   <ion-grid style="height: 100%; background-image: url('../../../assets/back3.jpg')">
+    <ion-row>
+      <ion-col size-sm="6" offset-sm="3">
+        <ion-segment (ionChange)="onSegmentChanged($event)" color="tertiary">
+          <ion-segment-button value="documentScanner" color="danger">
+            <ion-label color="secondary">J'ai déjà scanner</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="documentEnphoto" color="danger">
+            <ion-label color="secondary">Prendre des photos</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-col>
+    </ion-row>
     <ion-row class="ion-align-items-center" style="height: 100%">
 
       <ion-col size-sm="6" offset-sm="3">
@@ -30,11 +42,12 @@
             <form #DemanderPermisForm='ngForm' (ngSubmit)="onSubmit(DemanderPermisForm)">
               <div class="docuementScannerTrue ion-text-center" *ngIf="etatScanne">
                 <ion-item>
-                  <ion-label position="floating">Certificat viallageois<ion-text color="danger">*</ion-text>
+                  <ion-label >Certificat viallageois<ion-text color="danger">*</ion-text>
                   </ion-label>
+                </ion-item>
+                <ion-item>
                   <ion-input type="file" name="documentUnCtrl" ngModel required #documentUnCtrl="ngModel"></ion-input>
                 </ion-item>
-
                 <ion-item *ngIf="!documentUnCtrl.valid && documentUnCtrl.touched" lines="none">
                   <p>
                     Certificat viallageois Invalide
@@ -42,14 +55,15 @@
                 </ion-item>
 
                 <ion-item>
-                  <ion-label position="floating">Document 2<ion-text color="danger">*</ion-text>
+                  <ion-label>Carte d'identité<ion-text color="danger">*</ion-text>
                   </ion-label>
+                </ion-item>
+                <ion-item>
                   <ion-input type="file" name="documentDeux" ngModel required #documentDeuxCtrl="ngModel"></ion-input>
                 </ion-item>
-
                 <ion-item *ngIf="!documentDeuxCtrl.valid && documentDeuxCtrl.touched" lines="none">
                   <p>
-                    Document 2 invalide
+                    Carte d'identité
                   </p>
                 </ion-item>
               </div>
@@ -67,7 +81,7 @@
                   </ion-item>
 
                   <ion-item>
-                    <ion-label>Document 2</ion-label>
+                    <ion-label>Carte d'identité</ion-label>
                       <ion-button (click)="takeSecondPicture()">
                         <ion-icon slot="icon-only" name="camera" > </ion-icon> 
                       </ion-button>

@@ -13,17 +13,17 @@
       <ion-col size-sm="6" ofsset-sm="3"> 
         <ion-item>
           <ion-label>Payement</ion-label>
-          <ion-button (click)="onPayement()"[routerLink]="[ '/payement', 'liste-payement' ]">
+          <ion-button (click)="onPayement()"[routerLink]="[ '/payement']">
               <ion-icon slot="icon-only" name="card"></ion-icon>
             </ion-button>
         </ion-item>
       </ion-col>
     </ion-row>
-    <ion-row class="ion-justify-content-center ion-align-items-center">
+    <ion-row >
       <ion-col size-sm="6" offset-sm="3">
 
         <ion-list>
-          <ion-item *ngFor="let etape of etapes">
+          <ion-item *ngFor="let etape of etapes; let index = index;">
             <ion-avatar slot="start">
                 <ion-button [color]="etape.color" active>
                   <ion-icon *ngIf="etape.color === 'danger'" slot="start" name="close"></ion-icon>
@@ -32,8 +32,11 @@
                 </ion-button>
             </ion-avatar>
             <label>
-                {{ etape.description }}
+                {{ etape.description }} 
             </label>
+            <ion-button *ngIf="index==6"  slot="end" color="tertiary">
+              <ion-icon slot="icon-only" name="eye"></ion-icon> Voir l'avancé
+            </ion-button>
           </ion-item>
         </ion-list>
       </ion-col>
@@ -46,13 +49,13 @@
           </ion-item>
           <ion-item>
               <ion-label color="primary" *ngIf="complete" class="ion-text-center">
-                  <h5> Certificat Terminer !</h5>
+                  <h5> Titre foncier Terminer !</h5>
                 <ion-button color="success">
                   Télécharger
                 </ion-button>
               </ion-label> 
               <ion-label color="primary" *ngIf="!complete" class="ion-text-center">
-                  <h5> Certificat en cour !</h5>
+                  <h5> Titre foncier en cour !</h5>
               </ion-label> 
           </ion-item>
         </ion-list>

@@ -8,7 +8,6 @@ import { TerrainsPageRoutingModule } from './terrains-routing.module';
 
 import { TerrainsPage } from './terrains.page';
 import { InfoTerrainComponent } from './info-terrain/info-terrain.component';
-import { modalController } from '@ionic/core';
 
 @NgModule({
   imports: [

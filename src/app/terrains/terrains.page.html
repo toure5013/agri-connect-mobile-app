@@ -47,15 +47,17 @@
         </ion-segment>
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col size-sm="4" *ngFor="let terrain of terrains; let index = index;">
+
+    
+    <ion-row *ngIf="interfaceAcheter">
+      <ion-col size-sm="4" *ngFor="let terrain of terrainsAcheter; let index = index;">
         <ion-item>
           <ion-label>
-            <ion-img src="../../assets/background.jpg"></ion-img>
+            <ion-img [src]="terrain.imagesTerrain[0]"></ion-img>
           </ion-label>
         </ion-item>
         <ion-item>
-          <ion-button color="light" (click)="onInfo(index)">
+          <ion-button color="light" (click)="onInfoAcheter(index)">
             Info
           </ion-button>
           <ion-button color="success"[routerLink]="[ '/terrains', 'acheter', terrain.id ]"> 
@@ -64,5 +66,26 @@
         </ion-item>
       </ion-col>
     </ion-row>
+
+
+    <ion-row *ngIf="interfaceLouer">
+      <ion-col size-sm="4" *ngFor="let terrain of terrainsLouer; let indexLouer = index;">
+        <ion-item>
+          <ion-label>
+            <ion-img [src]="terrain.imagesTerrain[0]"></ion-img>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-button color="light" (click)="onInfoLocation(indexLouer)">
+            Info
+          </ion-button>
+          <ion-button color="success"[routerLink]="[ '/terrains', 'louer', terrain.id ]"> 
+            Louer
+          </ion-button>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+
   </ion-grid>
 </ion-content>

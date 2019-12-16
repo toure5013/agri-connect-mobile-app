@@ -18,7 +18,7 @@ export class HomePage implements OnInit {
       icon: "grid"
     },
     {
-      title: 'Acheter un terrain',
+      title: 'Acheter/Louer un terrain',
       url: '/terrains',
       icon: "card"
     },
@@ -28,12 +28,12 @@ export class HomePage implements OnInit {
       icon: "card"
     },
     {
-      title: 'Louer un terrain',
-      url: "/terrains",  //liste des terrains à louer
+      title: 'Verifier l\'authenticité d\'un papier',
+      url: "/permis/verification-titre-foncier",  //liste des terrains à louer
       icon: "card"
     },
     {
-      title: 'Mettre un terrain en location',
+      title: 'Vendre/Mettre en location un terrain',
       url: "/terrains/ajouter", //Ajouter un terrain à louer
       icon: "card"
     },
@@ -55,10 +55,6 @@ export class HomePage implements OnInit {
     this.isLoggin = this._authService.getLogState;
   }
 
-
-  ionViewWillEnter() {
-    this.isLoggin = this._authService.getLogState;
-  }
 
   ionViewDidEnter() {
     this.isLoggin = this._authService.getLogState;

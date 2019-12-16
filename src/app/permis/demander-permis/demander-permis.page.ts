@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SegmentChangeEventDetail } from '@ionic/core';
 import { AlertController, ToastController } from '@ionic/angular';
 import { Plugins, CameraResultType } from '@capacitor/core';
 
@@ -29,22 +30,13 @@ export class DemanderPermisPage implements OnInit {
 
 
   ngOnInit() {
-  
     this._alertControle.create({
-      header: 'Scanner les papiers',
-      message: 'Avez déjà scanner vos papier ou vous souhaiter le faire dans l\'application ?',
+      header: 'Comment deposer ces documents?',
+      message: '<p style="text-align:center">Ici vous avez deux possibilités, si vos papier son dejà scanner et mise dans votre téléphone, vous pouvez déposer directement en cliquant sur "déjà scanner" sinon vous pouvez utiliser l\'appareil photo de votre téléphone en cliquant sur "prendre photo" pour prendre vos documents en photos et les envoyés ! </p> ',
       buttons: [
         {
-          text: 'J\'ai dejà scanner',
-          handler: () => {
-            this.etatScanne = true;
-          }
-        },
-        {
-          text: 'Pas encore scanner',
-          handler: () => {
-            this.etatScanne = false;
-          }
+          text: 'Ok j\'ai compris',
+          role: 'cancel'
         }
       ]
     }).then(
@@ -114,18 +106,33 @@ export class DemanderPermisPage implements OnInit {
     this.image2Url = imageUrl;
   }
 
-  onSubmitForm() {
-    // let newView = new NatureView(
-    //   this.natureViewForm.get('name').value,
-    //   new Date(),
-    //   this.natureViewForm.get('description').value,
-    //   this.latitude,
-    //   this.longitude,
-    //   this.image1Url,
-    //   this.image2Url,
-    // );
-    // this.natureViewService.addNatureView(newView);
-    // this.navCtrl.pop();
+  onSubmitForm(DemanderCertificatform: NgForm) {
+    let newView = {
+      certificatVillageois : this.image1Url,
+      document2 : this.image2Url,
+    }
+      
+    console.log(newView);
+  }
+
+
+  // documentScanner documentEnphoto
+  onSegmentChanged(event: CustomEvent<SegmentChangeEventDetail>) {
+    console.log(event.detail.value);
+
+    //Prendre les photos
+    if (event.detail.value === "documentScanner") {
+      //Afficher le depot des dossiers par prise de photo
+      this.etatScanne = true;
+    }
+    //Uploder les documents
+    else {
+      //Afficher le depot des dossiers par uploader les document
+      this.etatScanne = false;
+    }
+
+
+
   }
 
 

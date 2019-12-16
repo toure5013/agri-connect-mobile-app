@@ -19,9 +19,6 @@ export class AcheterPage implements OnInit {
   ) { }
 
   ngOnInit() {
-     
-      
-
       this._activateRoute.paramMap.subscribe(paramMap => {
         console.log(paramMap.get('terrainId'))
 
@@ -41,12 +38,15 @@ export class AcheterPage implements OnInit {
       return;
     }
     let newAchat =  {
-      firstname : acheterTerrainForm.value.name,
+      firstname : acheterTerrainForm.value.firstname,
       lastname: acheterTerrainForm.value.lastname,
       telephone : acheterTerrainForm.value.telephone,
       concentement_achat : acheterTerrainForm.value.concentement_achat,
-      concentement_payement: acheterTerrainForm.value.concentement_payement
+      concentement_payement: acheterTerrainForm.value.concentement_payement,
+      terrain : this.terrains
+
     };
+    console.log(newAchat);
     this._terrainService.buyTerrain(newAchat);
     this._router.navigateByUrl('/terrains/liste-user-terrain')
   }

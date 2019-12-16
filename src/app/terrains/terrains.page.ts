@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { SegmentChangeEventDetail } from '@ionic/core';
-import { AlertController, ModalController, LoadingController } from '@ionic/angular';
+import { ModalController, LoadingController } from '@ionic/angular';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 
 import { TerrainsService } from '../services/terrains.service';
 import { InfoTerrainComponent } from './info-terrain/info-terrain.component';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-terrains',
@@ -15,16 +15,20 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class TerrainsPage implements OnInit {
 
   searchFormGroup: FormGroup;
-  terrains: any[] = [];
+  interfaceAcheter: boolean = true;
+  interfaceLouer: boolean = false;
+  terrainsAcheter: any[] = [];
+  terrainsLouer: any[];
+
   constructor(
     private _terrainService: TerrainsService,
-    private _alertController: AlertController,
+    // private _alertController: AlertController,
     private _modalController: ModalController,
     private _loadingController: LoadingController
   ) { }
 
   ngOnInit() {
-    this.terrains = this._terrainService.getTerrains;
+    this.terrainsAcheter = this._terrainService.getTerrains;
 
     this.searchFormGroup = new FormGroup(
       {
@@ -53,9 +57,9 @@ export class TerrainsPage implements OnInit {
         //Rechercher depuis le service
         this._terrainService.searchTerrain(keyWord);
 
-        setTimeout(()=>{
+        setTimeout(() => {
           loadingController.dismiss();
-        },1000)
+        }, 1000)
         // .subscribe(
         //   (searchedTerrains) => {
         //     //Faire la mise à jour des terrains
@@ -66,35 +70,67 @@ export class TerrainsPage implements OnInit {
       });
   }
 
+
+
+
   onSegmentChanged(event: CustomEvent<SegmentChangeEventDetail>) {
-    console.log(event.detail);
+    console.log(event.detail.value);
+
+    //Location de terrain
     if (event.detail.value === "louer") {
       //Afficher les terrains à louer
-    } else {
+      this.interfaceAcheter = false;
+      this._loadingController.create({
+        message: "Recherche en cours..."
+      }).then(
+        (loadingController) => {
+          loadingController.present();
+          //Rechercher depuis le service
+          this.interfaceLouer = true;
+          this.terrainsAcheter = []; //Terrain à louer 
+          this.terrainsLouer = this._terrainService.getTerrainsLouer;
+
+          setTimeout(() => {
+            loadingController.dismiss();
+          }, 500)
+        });
+    }
+    //Achat de terrain
+    else {
       //Afficher les terrains à acheter
+      this.interfaceLouer = false;
+      this._loadingController.create({
+        message: "Recherche en cours..."
+      }).then(
+        (loadingController) => {
+          loadingController.present();
+
+          //Rechercher depuis le service
+          this.interfaceAcheter = true;
+          this.terrainsLouer = [];
+          this.terrainsAcheter = this._terrainService.getTerrains; //Terrain à acheter 
+          setTimeout(() => {
+            loadingController.dismiss();
+          }, 500)
+        });
     }
   }
 
-  onInfo(i: number) {
-    let info = this.terrains[i];
-    // this._alertController.create({
-    //   header : "Information du terrain",
-    //   message : `<span style="color:red"> Prix : ${info.cost} \n<br> Lacalisation : ${info.localisation} \n<br> Superficie : ${info.superficie}</span>`,
-    //   buttons : [
-    //     {
-    //       text : 'Ok',
-    //       role: 'cancel'
-    //     }
-    //   ]
-    // }).then(
-    //   (alertElement)=>{
-    //     alertElement.present();
-    //   });
+
+
+
+
+  onInfoAcheter(i: number) {
+    let info = this.terrainsAcheter[i];
+ 
+    if(!info){
+      return; //Créer un alert pour dire que ce terrain n'existe
+    }
 
     this._modalController.create(
       {
         component: InfoTerrainComponent,
-        componentProps: { selectedTerrain: this.terrains[i] },
+        componentProps: { selectedTerrain: this.terrainsAcheter[i], typeAffaire: "achat" },
         id: 'infoTerrain'
       }).then(
         modelElement => {
@@ -108,4 +144,33 @@ export class TerrainsPage implements OnInit {
             }
           });
   }
+
+
+
+
+  onInfoLocation(id: number) {
+    let info = this.terrainsLouer[id];
+
+    if (!info) {
+      return; //Information terrain 
+    }
+    this._modalController.create(
+      {
+        component: InfoTerrainComponent,
+        componentProps: { selectedTerrain: info, typeAffaire: "location" },
+        id: 'infoTerrain'
+      }).then(
+        modelElement => {
+          modelElement.present();
+          return modelElement.onDidDismiss();
+        }).then(
+          resultData => {
+            console.log(resultData.data, resultData.role);
+            if (resultData.role === 'confirm') {
+              console.log('confirmed!!!');
+            }
+          });
+  }
+
+
 }

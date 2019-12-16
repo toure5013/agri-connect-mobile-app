@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 export class InfoTerrainComponent implements OnInit {
 
   @Input() selectedTerrain;
+  @Input() typeAffaire: 'achat' | 'location';
+
   images: string[] = [
     "../../assets/back.jpg",
     // "../../assets/back3.jpg",
@@ -23,7 +25,12 @@ export class InfoTerrainComponent implements OnInit {
   ) { }
   
   ngOnInit() {
-    this.selectedTerrain =  this._navParams.get('selectedTerrain');
+    // this.selectedTerrain =  this._navParams.get('selectedTerrain');
+    // console.log(this.selectedTerrain);
+  }
+
+  ionViewDidEnter() {
+    console.log(this.typeAffaire);
     console.log(this.selectedTerrain);
   }
 
@@ -35,6 +42,12 @@ export class InfoTerrainComponent implements OnInit {
   onbuy() {
     this.onCancel();
     let url = "/terrains/acheter/" + this.selectedTerrain.id;
+    this._router.navigateByUrl(url);
+  }
+
+  onLocation() {
+    this.onCancel();
+    let url = "/terrains/louer/" + this.selectedTerrain.id;
     this._router.navigateByUrl(url);
   }
 

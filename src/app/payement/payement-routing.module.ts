@@ -9,8 +9,12 @@ const routes: Routes = [
     component: PayementPage
   },
   {
-    path: 'liste-payement',
-    loadChildren: () => import('./liste-payement/liste-payement.module').then( m => m.ListePayementPageModule)
+    path: 'detail-payement/:reference',
+    loadChildren: () => import('./detail-payement/detail-payement.module').then( m => m.DetailPayementPageModule)
+  },
+  {
+    path: 'new-payement',
+    loadChildren: () => import('./new-payement/new-payement.module').then( m => m.NewPayementPageModule)
   }
 ];
 

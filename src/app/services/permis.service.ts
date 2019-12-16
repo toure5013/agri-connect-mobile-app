@@ -9,7 +9,7 @@ export class PermisService {
 
   baseUrl = 'https://backend-agri-connect.herokuapp.com/api/v1';
 
-  private _etatAvancementPermis = 2;
+  private _etatAvancementPermis = 1;
 
   constructor(
     private _httpClient: HttpClient

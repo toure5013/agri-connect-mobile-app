@@ -18,6 +18,10 @@ const routes: Routes = [
     path: 'etat-permis',
     loadChildren: () => import('./etat-permis/etat-permis.module').then( m => m.EtatPermisPageModule)
     ,canLoad: [AuthGuard]
+  },
+  {
+    path: 'verification-titre-foncier',
+    loadChildren: () => import('./verification-titre-foncier/verification-titre-foncier.module').then( m => m.VerificationTitreFoncierPageModule)
   }
 ];
 

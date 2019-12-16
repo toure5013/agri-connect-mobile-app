@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="warning">
         <ion-buttons slot="start">
             <ion-back-button defaultHref="/auth"></ion-back-button>
         </ion-buttons>
@@ -9,10 +9,10 @@
 
 <ion-content>
 
-    <ion-grid style="height: 100%">
-        <ion-row class="ion-justify-content-center ion-align-items-center">
+    <ion-grid>
+        <ion-row >
             <ion-col size-sm="6" offset-sm="3">
-                <ion-card class="ion-align-items-center">
+                <ion-card>
                     <ion-card-header>
                         <ion-card-title class="ion-text-center">Inscription</ion-card-title>
                     </ion-card-header>
@@ -28,9 +28,9 @@
                             <form #registerForm='ngForm' (ngSubmit)="onSubmit(registerForm)">
                                 <ion-item>
                                     <ion-label position="floating">
-                                        Nom <ion-text color="danger">*</ion-text>
+                                         Nom <ion-text color="danger">*</ion-text>
                                     </ion-label>
-                                    <ion-input type="name" name="firstname" ngModel required></ion-input>
+                                    <ion-input type="text" name="firstname" ngModel required></ion-input>
                                 </ion-item>
                                 <ion-item>
                                     <ion-label position="floating">
@@ -56,8 +56,8 @@
                                     <ion-input type="password" name="passwordConfirm" ngModel required></ion-input>
                                 </ion-item>
                                 <div class="ion-padding">
-                                    <ion-button type="submit" expand="block" color="warning">
-                                        <ion-icon [disabled]="!registerForm.valid" slot="start" name="add"></ion-icon>
+                                    <ion-button [disabled]="!registerForm.valid"  type="submit" expand="block" color="warning">
+                                        <ion-icon slot="start" name="add"></ion-icon>
                                         Inscription
                                     </ion-button>
                                     <ion-button 

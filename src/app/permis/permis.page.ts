@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { PermisService } from '../services/permis.service';
 import { AuthService } from '../services/auth.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-permis',
@@ -9,9 +10,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./permis.page.scss'],
 })
 export class PermisPage implements OnInit {
+
+
   message: string = '';
   permis: any = '' || [ ];
   user: any;
+
   deconnexionButton =  {
     title: 'Deconnexion',
     url: 'auth/deconnexion',
@@ -43,7 +47,7 @@ export class PermisPage implements OnInit {
     if(this.user){
       id = this.user.id; 
     }else{
-      id = 10000000
+      id = 1
     }
     await this._permisService.getPermisById(id).subscribe(
       (data: any)=>{
@@ -59,10 +63,15 @@ export class PermisPage implements OnInit {
         console.log(error);
         this.message = 'Une erreur s\'est produite réessayez' ;
       });
+
+      this.permis = [{
+        id: 1,
+
+      }]
   }
 
   onVoirEtat() {
-    this._permisService.ajouterUnNouveauEtat(7);
+    this._permisService.ajouterUnNouveauEtat = 7;
   }
   
   onNewPermis() {

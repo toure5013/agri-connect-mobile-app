@@ -23,6 +23,10 @@ const routes: Routes = [
   {
     path: 'liste-user-terrain',
     loadChildren: () => import('./lister-user-terrain/lister-user-terrain.module').then(m => m.ListerUserTerrainPageModule)
+  },
+  {
+    path: 'suivit-etape-permis',
+    loadChildren: () => import('./suivit-etape-permis/suivit-etape-permis.module').then( m => m.SuivitEtapePermisPageModule)
   }
 
 ];

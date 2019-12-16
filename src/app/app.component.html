@@ -2,15 +2,25 @@
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
       <ion-header>
-        <ion-toolbar>
+        <ion-toolbar color="warning">
           <ion-title>Menu</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content>
         <ion-list>
+            <ion-item>
+              <ion-icon slot="start" name="login"></ion-icon>
+                <ion-avatar>
+                  <img src="../assets/logo.jpg" />
+                </ion-avatar>
+                <ion-label class="ion-margin">
+                  <p> {{ userData.firstname || 'Bienvenue !'   }}</p>
+                  <h2> {{ userData.lastname || 'Agri-Connect'}}</h2>
+                </ion-label>
+            </ion-item>
           <ion-menu-toggle auto-hide="true" *ngFor="let p of appPages">
             <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
-              <ion-icon slot="start" [name]="p.icon"></ion-icon>
+              <ion-icon slot="start" color="warning" [name]="p.icon"></ion-icon>
               <ion-label>
                 {{p.title}}
               </ion-label>

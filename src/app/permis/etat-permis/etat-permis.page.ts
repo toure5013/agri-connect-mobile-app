@@ -22,11 +22,11 @@ export class EtatPermisPage implements OnInit {
     },
     {
       numero : 2,
-      color: 'danger', description: 'Payement des frais du certificats'
+      color: 'danger', description: 'Payement des premiers frais'
     },
     {
       numero : 3,
-      color: 'danger', description: 'Verification des papiers'
+      color: 'danger', description: 'Verification des documents'
     },
     {
       numero : 4,
@@ -34,15 +34,15 @@ export class EtatPermisPage implements OnInit {
     },
     {
       numero : 5,
-      color: 'danger', description: 'Verfication de l\'integrité'
+      color: 'danger', description: 'Verfication de la correspondance des papiers et du terrain'
     },
     {
       numero : 6,
-      color: 'danger', description: 'Reception par les autorités'
+      color: 'danger', description: 'Finalisation du document'
     },
     {
       numero : 7,
-      color: 'danger', description: 'Finalisation du papier'
+      color: 'danger', description: 'Finalisation des payements '
     },
   ];
   complete: boolean = false;
@@ -54,9 +54,9 @@ export class EtatPermisPage implements OnInit {
 
      let etape = this._permisService.getEtatAvancementPermis;
     //Creer un service pour connaitre létat d'avancement du papier
-    for(let i =0;  i < etape ; i++ ) {
+    for(let i =0;  i <= etape ; i++ ) {
        this.etapes[i].color = "success";
-       if(i == 6){
+       if(i == 7){
          this.complete = true;
        }
     }

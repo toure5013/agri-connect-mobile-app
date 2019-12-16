@@ -13,6 +13,7 @@ import { AuthService } from './services/auth.service';
 export class AppComponent {
   @Input() newMenuElement;
 
+  userData: any[] = [];
   public appPages = [
     {
       title: 'Accueil',
@@ -20,39 +21,39 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'Liste de mes demandes de certificats',
-      url: '/permis',
-      icon: 'albums'
-    },
-    {
       title: 'Demander un titre foncier',
       url: '/permis/demander-permis',
       icon: 'add'
     },
     {
-      title: 'Acheter un terrain',
+      title: 'Suivre mes titres fonciers en cours',
+      url: '/permis',
+      icon: 'eye'
+    },  
+    {
+      title: 'Achats & Location de terrains',
       url: '/terrains',
-      icon: "card"
+      icon: "paper-plane"
     },
     {
-      title: 'Lister mes terrains',
-      url: '/terrain/liste-user-terrain',
-      icon: "grid"
-    },
-    {
-      title: 'Vendre un terrain',
+      title: 'Vendre & Mettre en location',
       url: '/terrains/ajouter', //choisir si c'est pour vendre ou pour faire louer
+      icon: "add"
+    },
+    {
+      title: 'Suivre mes achats/locations de terrains',
+      url: "/terrains/lister-user-terrain", //Ajouter un terrain à louer
+      icon: "flask"
+    },
+    {
+      title: 'Suivre mes payement',
+      url: "/payement", //Ajouter un terrain à louer
       icon: "card"
     },
     {
-      title: 'Louer un terrain',
-      url: "/terrains/louer",  //liste des terrains à louer
-      icon: "card"
-    },
-    {
-      title: 'Mettre terrain en location',
-      url: "/terrains/ajouter", //Ajouter un terrain à louer
-      icon: "card"
+      title: 'Verificer un titre foncier',
+      url: '/permis/verification-titre-foncier', //choisir si c'est pour vendre ou pour faire louer
+      icon: "add"
     },
     {
       title: 'Deconnexion',
@@ -68,6 +69,7 @@ export class AppComponent {
     private _authService: AuthService
   ) {
     this.initializeApp();
+    this.userData = this._authService.getUserData;
   }
 
   initializeApp() {
